@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-bottom: 2px solid #e0e0e0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 10px 20px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+      cursor: pointer;
+      color: #444;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s, border-bottom 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-item:hover {
+      color: #00bfa5;
+      border-bottom: 2px solid #00bfa5;
+    }
+
+    .active {
+      color: #00bfa5;
+      border-bottom: 2px solid #00bfa5;
+    }
+
+    /* ===== CONTAINER ===== */
+    .profile-container {
+      width: 90%;
+      max-width: 700px;
+      background-color: #fff;
+      margin: 40px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    /* ===== CABEÇALHO ===== */
+    .profile-header {
+      background-color: #555;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 15px;
+      font-size: 28px;
+    }
+
+    .profile-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .profile-header p {
+      margin-top: 5px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* ===== FORMULÁRIO ===== */
+    .profile-content {
+      padding: 25px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .form-row label {
+      flex: 1;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .form-row input {
+      flex: 3;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .form-row input:focus {
+      border-color: #00bfa5;
+    }
+
+    .form-row button {
+      background-color: transparent;
+      color: #00bfa5;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .form-row button:hover {
+      opacity: 0.7;
+    }
+
+    /* ===== NOTIFICAÇÕES ===== */
+    .notifications {
+      margin-top: 25px;
+    }
+
+    .notification-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+    }
+
+    .notification-item div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-item span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    /* ===== BOTÕES ===== */
+    .actions {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .btn-signout {
+      background-color: #00bfa5;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .btn-signout:hover {
+      background-color: #00a78f;
+    }
+
+    .delete {
+      margin-top: 10px;
+      display: inline-block;
+      color: #999;
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .delete:hover {
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <div class="navbar">
+    <a class="nav-item" href="index.html">🏠 Início</a>
+    <a class="nav-item" href="ebooks.html">📚 Ebook's</a>
+    <a class="nav-item" href="jogo.html">🎮 Jogo</a>
+    <a class="nav-item" href="mensagens.html">💌 Mensagens</a>
+    <a class="nav-item active" href="perfil.html">👤 Perfil do Usuário</a>
+  </div>
+
+  <!-- ===== CONTEÚDO DO PERFIL ===== -->
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="avatar">🖼️</div>
+      <h2>Perfil do Usuário</h2>
+      <p>seunome@email.com</p>
+    </div>
+
+    <div class="profile-content">
+      <p class="section-title">Informações do Usuário</p>
+
+      <div class="form-group">
+        <div class="form-row">
+          <label for="name">Nome</label>
+          <input type="text" id="name" placeholder="Inserir nome">
+          <button>Salvar</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Inserir email">
+          <button>Salvar</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Inserir senha">
+          <button>Salvar</button>
+        </div>
+      </div>
+
+      <div class="notifications">
+        <p class="section-title">Notificações</p>
+
+        <div class="notification-item">
+          <div>
+            <strong>On Follow</strong>
+            <span>Receber notificação quando alguém te seguir</span>
+          </div>
+          <input type="checkbox">
+        </div>
+
+        <div class="notification-item">
+          <div>
+            <strong>New Message</strong>
+            <span>Receber notificação ao receber uma nova mensagem</span>
+          </div>
+          <input type="checkbox">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-signout">SIGN OUT</button><br>
+        <span class="delete">DELETE ACCOUNT</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
