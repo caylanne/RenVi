@@ -20,6 +20,10 @@
       border-bottom: 2px solid #e0e0e0;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
     }
 
     .nav-item {
@@ -39,29 +43,57 @@
       border-bottom: 2px solid #00bfa5;
     }
 
-    .nav-item i {
-      margin-right: 6px;
-    }
-
     .active {
       color: #00bfa5;
       border-bottom: 2px solid #00bfa5;
     }
 
-    /* Conteúdo principal */
-    .content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh - 60px);
-      font-size: 18px;
-      color: #333;
+    /* Banner */
+    .banner {
+      width: 100%;
+      height: 350px;
+      margin-top: 60px;
+      background-image: url('https://www.politize.com.br/wp-content/uploads/2024/08/Voce-sabe-o-que-sao-cidades-sustentaveis-Entenda-o-ODS-11-scaled.webp');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 4px solid #00bfa5;
     }
 
+    /* Conteúdo principal */
+    .content {
+      max-width: 900px;
+      margin: 40px auto 60px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .content h1 {
+      color: #00bfa5;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      text-align: justify;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .banner {
+        height: 220px;
+      }
+      .content {
+        margin: 20px;
+        padding: 25px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Barra de navegação -->
   <div class="navbar">
     <a class="nav-item active" href="index.html">Início</a>
     <a class="nav-item" href="ebooks.html">Ebook's</a>
@@ -70,13 +102,21 @@
     <a class="nav-item" href="perfil.html">Perfil do Usuário</a>
   </div>
 
-  <!-- Conteúdo da página -->
+  <div class="banner"></div>
+
   <div class="content">
-    <p>Enter Text</p>
+    <h1>Cidades Sustentáveis: Um Caminho para o Futuro</h1>
+
+    <p>O crescimento urbano acelerado traz inúmeros desafios para as cidades modernas, como o aumento da poluição, o consumo excessivo de recursos naturais e a desigualdade social. Diante disso, surge a necessidade de repensar a forma como vivemos e construímos nossos espaços urbanos. É nesse contexto que se destacam as cidades sustentáveis, modelo de desenvolvimento que busca conciliar o progresso econômico, a inclusão social e a preservação ambiental.</p>
+
+    <p>Uma cidade sustentável é planejada para garantir qualidade de vida à população sem comprometer os recursos das futuras gerações. Para isso, adota práticas que envolvem o uso de energias renováveis, o incentivo ao transporte público eficiente, a redução da poluição, o reaproveitamento de resíduos e a valorização das áreas verdes. Além disso, prioriza o bem-estar das pessoas, oferecendo infraestrutura acessível, mobilidade urbana segura e espaços de convivência saudáveis.</p>
+
+    <p>Diversos exemplos ao redor do mundo mostram que esse modelo é possível e eficaz. Copenhague, na Dinamarca, é reconhecida como uma das cidades mais sustentáveis do planeta, com grande incentivo ao uso de bicicletas e à energia limpa. Curitiba, no Brasil, é referência em transporte coletivo e reciclagem. Já Vancouver, no Canadá, destaca-se pelo uso de energia renovável e pela preservação ambiental, enquanto Singapura combina tecnologia e sustentabilidade, com políticas exemplares de gestão da água e arborização urbana.</p>
+
+    <p>Investir em cidades sustentáveis é investir no futuro. Mais do que um conceito urbano, trata-se de um compromisso coletivo com o planeta e com as próximas gerações. A educação desempenha um papel fundamental nesse processo, pois é por meio do conhecimento e da conscientização que formamos cidadãos capazes de construir um mundo mais justo, equilibrado e sustentável.</p>
   </div>
 
   <script>
-    // Exemplo simples de interação
     document.querySelectorAll('.nav-item').forEach(link => {
       link.addEventListener('click', () => {
         console.log('Navegando para: ' + link.textContent.trim());
