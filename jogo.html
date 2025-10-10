@@ -70,7 +70,7 @@
     }
 
     .game-box:hover {
-      background-color: #dedede;
+      background-color: #009b85;
     }
 
     .btn-play {
@@ -96,11 +96,11 @@
 
   <!-- Barra de navegação -->
   <div class="navbar">
-    <a class="nav-item" href="inicio.html">🏠 Início</a>
-    <a class="nav-item" href="ebooks.html">📚 Ebook's</a>
-    <a class="nav-item active" href="jogo.html">🧩 Jogo</a>
-    <a class="nav-item" href="mensagens.html">💌 Mensagens</a>
-    <a class="nav-item" href="perfil.html">👤 Perfil do Usuário</a>
+    <a class="nav-item" href="inicio.html">Início</a>
+    <a class="nav-item" href="ebooks.html">Ebook's</a>
+    <a class="nav-item active" href="jogo.html">Jogo</a>
+    <a class="nav-item" href="mensagens.html">Mensagens</a>
+    <a class="nav-item" href="perfil.html">Perfil do Usuário</a>
   </div>
 
   <!-- Área principal de jogo -->
@@ -111,22 +111,109 @@
     </div>
   </div>
 
-  <script>
-    // Interação simples para exemplo
-    const startBtn = document.getElementById("startGame");
-    const gameBox = document.getElementById("gameBox");
+<script>
+  const questions = [
+    {
+      question: "Qual é a capital do Brasil?",
+      options: ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"],
+      answer: "Brasília"
+    },
+    {
+      question: "Quanto é 7 x 8?",
+      options: ["54", "56", "64", "58"],
+      answer: "56"
+    },
+    {
+      question: "Quem escreveu 'Dom Casmurro'?",
+      options: ["Machado de Assis", "Carlos Drummond", "José de Alencar", "Clarice Lispector"],
+      answer: "Machado de Assis"
+    }
+  ];
 
-    startBtn.addEventListener("click", () => {
-      gameBox.innerHTML = `
-        <iframe 
-          src="https://games.construct.net/18657/latest" 
-          width="100%" height="100%" 
-          frameborder="0"
-          style="border-radius: 8px;">
-        </iframe>
-      `;
-    });
-  </script>
+  let currentQuestion = 0;
+  let score = 0;
+
+  const startBtn = document.getElementById("startGame");
+  const gameBox = document.getElementById("gameBox");
+
+  startBtn.addEventListener("click", () => {
+    showQuestion();
+  });
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    gameBox.innerHTML = `
+      <div style="padding: 20px; text-align: center;">
+        <h2 style="color: #333;">${q.question}</h2>
+        <div id="options" style="margin-top: 20px;">
+          ${q.options.map(opt => `
+            <button 
+              class="option-btn"
+              onclick="checkAnswer('${opt}')"
+              style="
+                margin: 8px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                background-color: #fff;
+                color: #333;
+                cursor: pointer;
+                border: 2px solid #ccc;
+                transition: all 0.2s;
+              "
+              onmouseover="this.style.borderColor='#00bfa5'"
+              onmouseout="this.style.borderColor='#ccc'"
+            >${opt}</button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function checkAnswer(selected) {
+    const correct = questions[currentQuestion].answer;
+    if (selected === correct) {
+      score++;
+      alert("✅ Resposta correta!");
+    } else {
+      alert("❌ Resposta incorreta.");
+    }
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    gameBox.innerHTML = `
+      <div style="text-align: center; padding: 40px;">
+        <h2>🏁 Fim do Jogo!</h2>
+        <p style="font-size: 18px;">Você acertou <strong>${score}</strong> de <strong>${questions.length}</strong> perguntas.</p>
+        <button onclick="restartGame()" style="
+          margin-top: 20px;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 6px;
+          background-color: #00bfa5;
+          color: white;
+          cursor: pointer;
+          font-size: 15px;
+        ">🔄 Jogar Novamente</button>
+      </div>
+    `;
+  }
+
+  function restartGame() {
+    currentQuestion = 0;
+    score = 0;
+    showQuestion();
+  }
+</script>
+
 
 </body>
 </html>
