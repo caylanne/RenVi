@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mensagens</title>
+  <title>Mensagens - RenVi</title>
   <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
@@ -21,9 +21,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       padding: 10px 20px;
       justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .nav-item {
@@ -96,42 +93,38 @@
       font-size: 14px;
     }
 
-    /* ===== MODAL DE CHAT ===== */
+    /* ===== MODAL DE CONVERSA ===== */
     .chat-modal {
-      display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-    }
-
-    .chat-box {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: #fff;
-      width: 350px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      display: flex;
+      width: 400px;
+      max-width: 90%;
+      display: none;
       flex-direction: column;
       overflow: hidden;
-      animation: fadeIn 0.3s;
+      z-index: 10;
     }
 
     .chat-header {
-      background: #00bfa5;
+      background-color: #00bfa5;
       color: #fff;
-      padding: 12px;
-      text-align: center;
+      padding: 15px;
       font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .chat-messages {
-      flex: 1;
+    .chat-body {
       padding: 15px;
-      overflow-y: auto;
       height: 250px;
+      overflow-y: auto;
+      font-size: 14px;
     }
 
     .chat-input {
@@ -144,30 +137,34 @@
       border: none;
       padding: 10px;
       font-size: 14px;
+      outline: none;
     }
 
     .chat-input button {
       background: #00bfa5;
-      color: white;
+      color: #fff;
       border: none;
       padding: 10px 15px;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
-    .chat-input button:hover {
-      background: #009e8e;
+    .close-btn {
+      cursor: pointer;
+      font-size: 18px;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+    .chat-msg {
+      margin: 8px 0;
+    }
+
+    .chat-msg strong {
+      color: #00bfa5;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== BARRA DE NAVEGAÇÃO ===== -->
+  <!-- ===== NAVBAR ===== -->
   <div class="navbar">
     <a class="nav-item" href="inicio.html">Início</a>
     <a class="nav-item" href="ebooks.html">Ebook's</a>
@@ -178,81 +175,111 @@
 
   <!-- ===== CONTEÚDO PRINCIPAL ===== -->
   <div class="content">
-    <div class="message" data-user="Amanda Portela">
+    <div class="message" data-user="Amanda Portela" data-msg="Você viu o novo painel de energia solar no projeto RenVi? Está incrível! ☀️">
       <div class="avatar"></div>
       <div class="message-text">
         <h4>Amanda Portela</h4>
-        <p>Oi! Tudo bem? Vamos conversar sobre o projeto?</p>
+        <p>“Você viu o novo painel de energia solar... ☀️”</p>
       </div>
     </div>
 
-    <div class="message" data-user="Prof. Vanderley">
+    <div class="message" data-user="Prof. Vanderley" data-msg="Gostei da proposta sobre cidades inteligentes, precisamos aplicar isso na próxima aula! 📘">
       <div class="avatar"></div>
       <div class="message-text">
-        <h4>Prof. Vanderley</h4>
-        <p>Enviei o material da aula de hoje. Dê uma olhada!</p>
+        <h4>Vanderley Soares</h4>
+        <p>“Gostei da proposta sobre cidades inteligentes...”</p>
       </div>
     </div>
 
-    <div class="message" data-user="Caylanne Rodrigues">
+    <div class="message" data-user="Caylanne Rodrigues" data-msg="Podemos incluir mais dados sobre eficiência energética e mobilidade verde? 🚲">
       <div class="avatar"></div>
       <div class="message-text">
         <h4>Caylanne Rodrigues</h4>
-        <p>Terminei o design da página inicial 😄</p>
+        <p>“Podemos incluir mais dados sobre eficiência...”</p>
       </div>
     </div>
 
-    <div class="message" data-user="Alicia Portela">
+    <div class="message" data-user="Alicia Portela" data-msg="Adorei o visual do app! Ficou moderno e sustentável ao mesmo tempo 🌿">
       <div class="avatar"></div>
       <div class="message-text">
         <h4>Alicia Portela</h4>
-        <p>Já viu as novas ideias do grupo?</p>
+        <p>“Adorei o visual do app! 🌿”</p>
       </div>
     </div>
   </div>
 
-  <!-- ===== MODAL DE CHAT ===== -->
+  <!-- ===== MODAL DE CONVERSA ===== -->
   <div class="chat-modal" id="chatModal">
-    <div class="chat-box">
-      <div class="chat-header" id="chatHeader">Chat</div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Digite uma mensagem...">
-        <button id="sendBtn">Enviar</button>
-      </div>
+    <div class="chat-header">
+      <span id="chatUser"></span>
+      <span class="close-btn" onclick="closeChat()">✖</span>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Digite sua mensagem...">
+      <button onclick="sendMessage()">Enviar</button>
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById("chatModal");
-    const chatHeader = document.getElementById("chatHeader");
-    const chatMessages = document.getElementById("chatMessages");
-    const chatInput = document.getElementById("chatInput");
+    const messages = document.querySelectorAll('.message');
+    const chatModal = document.getElementById('chatModal');
+    const chatUser = document.getElementById('chatUser');
+    const chatBody = document.getElementById('chatBody');
+    let currentUser = '';
 
-    document.querySelectorAll('.message').forEach(msg => {
+    // Função para carregar mensagens do LocalStorage
+    function loadMessages(user) {
+      const stored = localStorage.getItem('chat_' + user);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    // Função para salvar mensagens no LocalStorage
+    function saveMessages(user, messages) {
+      localStorage.setItem('chat_' + user, JSON.stringify(messages));
+    }
+
+    // Exibir mensagens ao abrir o chat
+    function showMessages(user) {
+      const msgs = loadMessages(user);
+      chatBody.innerHTML = msgs.map(m => `<p class="chat-msg"><strong>${m.sender}:</strong> ${m.text}</p>`).join('');
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Abrir chat ao clicar no contato
+    messages.forEach(msg => {
       msg.addEventListener('click', () => {
-        const user = msg.dataset.user;
-        chatHeader.textContent = `Conversando com ${user}`;
-        chatMessages.innerHTML = `<p><strong>${user}:</strong> Oi! Como vai?</p>`;
-        modal.style.display = "flex";
+        currentUser = msg.dataset.user;
+        chatUser.textContent = currentUser;
+        const msgs = loadMessages(currentUser);
+        if (msgs.length === 0) {
+          // Adiciona mensagem inicial
+          msgs.push({ sender: currentUser, text: msg.dataset.msg });
+          saveMessages(currentUser, msgs);
+        }
+        showMessages(currentUser);
+        chatModal.style.display = 'flex';
       });
     });
 
-    document.getElementById("sendBtn").addEventListener("click", () => {
-      const text = chatInput.value.trim();
-      if (text !== "") {
-        const p = document.createElement("p");
-        p.innerHTML = `<strong>Você:</strong> ${text}`;
-        chatMessages.appendChild(p);
-        chatInput.value = "";
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+    // Enviar nova mensagem
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (text !== '') {
+        const msgs = loadMessages(currentUser);
+        msgs.push({ sender: 'Você', text });
+        saveMessages(currentUser, msgs);
+        showMessages(currentUser);
+        input.value = '';
       }
-    });
+    }
 
-    // Fecha modal ao clicar fora
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    });
+    // Fechar modal
+    function closeChat() {
+      chatModal.style.display = 'none';
+    }
   </script>
+
 </body>
 </html>
