@@ -1,128 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Tela de Login</title>
-    <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
+  <title>Login</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #009688;
+      font-family: 'Arial', sans-serif;
+      background-color: #009688; 
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: #333;
     }
 
     .login-container {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      width: 320px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-      text-align: left;
+      background-color: #ffffff; 
+      padding: 40px 30px;
+      border-radius: 15px;
+      width: 360px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: all 0.3s ease;
     }
 
-    .app-title {
-      position: absolute;
-      top: 30px;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
+    .login-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     }
 
     .login-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #009688;
+      margin-bottom: 25px;
+      color: #00a68f;
+      font-size: 32px;
     }
 
     label {
-      font-weight: lighter;
       display: block;
+      text-align: left;
       margin-bottom: 5px;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #555;
     }
 
-    input {
+    .login-container input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 5px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 25px;
       box-sizing: border-box;
+      transition: all 0.3s ease;
     }
 
-    button {
-      background-color: #fcb900;
-      color: white;
+    .login-container input:focus {
+      border-color: #00a68f;
+      box-shadow: 0 0 8px rgba(0,166,143,0.2);
+      outline: none;
+    }
+
+    .login-container button {
+      background-color: #00a68f;
+      color: #fff;
       border: none;
-      padding: 12px;
+      padding: 14px;
       width: 100%;
-      border-radius: 5px;
+      border-radius: 50px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 20px;
+      transition: all 0.3s ease;
     }
 
-    button:hover {
-      background-color: #e6a800;
+    .login-container button:hover {
+      background-color: #008f7a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 166, 143, 0.3);
     }
 
     .link {
-      text-align: center;
-      margin-top: 10px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
       font-size: 14px;
     }
 
     .link a {
-      color: #333;
+      color: #00a68f;
       text-decoration: none;
-      display: block;
-      margin-top: 5px;
+      transition: all 0.3s ease;
     }
 
     .link a:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 400px) {
+      .login-container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+      h2 {
+        font-size: 28px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="app-title">App Name</div>
-
   <div class="login-container">
-    <h2>Log In</h2>
+    <h2>Login</h2>
 
-    <!-- Formulário agora chama a função loginUser ao ser enviado -->
     <form onsubmit="loginUser(event)">
       <label for="email">Email</label>
       <input type="email" id="email" placeholder="nome@email.com" required>
 
-      <label for="password">Password</label>
+      <label for="password">Senha</label>
       <input type="password" id="password" placeholder="********" required>
 
-      <button type="submit">LOGIN</button>
+      <button type="submit">ENTRAR</button>
     </form>
 
     <div class="link">
-      <a href="#">ESQUECEU A SENHA?</a>
-      <a href="cadastro.html">CADASTRE-SE</a>
+      <a href="#">Esqueceu a senha?</a>
+      <a href="cadastro.html">Cadastre-se</a>
     </div>
   </div>
 
   <script>
     function loginUser(event) {
-      event.preventDefault(); // Impede envio do formulário
+      event.preventDefault();
 
-      // Aqui você pode adicionar lógica de autenticação real
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('password').value.trim();
 
-      // Simulação de login e redirecionamento:
-      // alert("Login feito com sucesso!");
+      let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-      // Redireciona para a tela de início
-      window.location.href = 'inicio.html';
+      const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
+
+      if(usuarioValido) {
+        // ✅ Salva usuário logado no LocalStorage
+        localStorage.setItem('loggedUser', JSON.stringify(usuarioValido));
+
+        alert(`✅ Bem-vindo, ${usuarioValido.nome}!`);
+        window.location.href = 'inicio.html';
+      } else {
+        alert("⚠️ Email ou senha incorretos!");
+      }
     }
   </script>
 

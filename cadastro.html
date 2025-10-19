@@ -2,94 +2,116 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Tela de Cadastro</title>
-    <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
+  <title>Cadastro</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #009688;
+      font-family: 'Arial', sans-serif;
+      background-color: #009688; /* Fundo verde */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: #333;
     }
 
     .signup-container {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      width: 320px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-      text-align: left;
+      background-color: #ffffff; /* Formulário branco */
+      padding: 40px 30px;
+      border-radius: 15px;
+      width: 360px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .signup-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     }
 
     .signup-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #00A898;
+      margin-bottom: 25px;
+      color: #00a68f; /* Verde RenVi */
+      font-size: 32px;
     }
 
     label {
-      font-weight: lighter;
       display: block;
+      text-align: left;
       margin-bottom: 5px;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #555;
     }
 
     .signup-container input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 5px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 25px;
       box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .signup-container input:focus {
+      border-color: #00a68f;
+      box-shadow: 0 0 8px rgba(0,166,143,0.2);
+      outline: none;
     }
 
     .signup-container button {
-      background-color: #fcb900;
-      color: white;
+      background-color: #00a68f; /* Botão verde */
+      color: #fff;
       border: none;
-      padding: 12px;
+      padding: 14px;
       width: 100%;
-      border-radius: 5px;
+      border-radius: 50px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 20px;
+      transition: all 0.3s ease;
     }
 
     .signup-container button:hover {
-      background-color: #e6a800;
+      background-color: #008f7a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 166, 143, 0.3);
     }
 
     .login-link {
-      margin-top: 15px;
-      display: block;
-      font-size: 14px;
-      color: #333;
-      text-align: center;
+      margin-top: 20px;
+      display: inline-block;
+      font-size: 15px;
+      color: #00a68f;
       text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
     }
 
     .login-link:hover {
-      text-decoration: underline;
+      border-bottom: 1px solid #00a68f;
     }
 
-    .app-title {
-      position: absolute;
-      top: 30px;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
+    @media (max-width: 400px) {
+      .signup-container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="app-title">App Name</div>
-
   <div class="signup-container">
-    <h2>Sign Up</h2>
+    <h2>Cadastre-se</h2>
 
     <form onsubmit="registerUser(event)">
       <label for="email">Email</label>
@@ -107,7 +129,7 @@
       <button type="submit">CADASTRAR</button>
     </form>
 
-    <a href="login.html" class="login-link">JÁ TEM UMA CONTA?</a>
+    <a href="login.html" class="login-link">Já tem uma conta?</a>
   </div>
 
   <script>
@@ -116,23 +138,36 @@
 
       const nome = document.getElementById('fullname').value.trim();
       const email = document.getElementById('email').value.trim();
+      const usuario = document.getElementById('username').value.trim();
+      const senha = document.getElementById('password').value.trim();
 
-      // Armazena nome e e-mail localmente
-      localStorage.setItem('usuarioNome', nome);
-      localStorage.setItem('usuarioEmail', email);
+      if(!nome || !email || !usuario || !senha) {
+        alert("⚠️ Preencha todos os campos!");
+        return;
+      }
+
+      let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+      const emailExistente = usuarios.some(u => u.email === email);
+      const usuarioExistente = usuarios.some(u => u.usuario === usuario);
+
+      if(emailExistente) {
+        alert("⚠️ Este email já está cadastrado!");
+        return;
+      }
+      if(usuarioExistente) {
+        alert("⚠️ Este usuário já existe!");
+        return;
+      }
+
+      usuarios.push({ nome, email, usuario, senha });
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
       alert("✅ Cadastro realizado com sucesso!");
-
-      // Redireciona após 1 segundo
       setTimeout(() => {
         window.location.href = "inicio.html";
       }, 1000);
     }
-  </script>
-
-</body>
-</html>
-
   </script>
 
 </body>
