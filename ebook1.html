@@ -9,82 +9,46 @@
       margin: 0;
       font-family: "Segoe UI", sans-serif;
       background-color: #f8f8f8;
-    }
-
-    header {
-      background-color: #00bfa5;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .container {
-      padding: 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
     }
 
-    .open-btn {
-      display: inline-block;
-      margin: 30px auto;
-      padding: 12px 25px;
+    h1 {
+      color: #00bfa5;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
       background-color: #00bfa5;
-      color: white;
-      text-decoration: none;
+      color: #fff;
+      padding: 12px 25px;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: 600;
-      font-size: 16px;
       transition: background 0.3s;
+      font-size: 16px;
     }
 
-    .open-btn:hover {
+    .btn:hover {
       background-color: #009e8b;
-    }
-
-    iframe {
-      width: 100%;
-      height: 90vh;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    @media (max-width: 768px) {
-      iframe {
-        display: none;
-      }
-
-      .mobile-msg {
-        font-size: 15px;
-        color: #444;
-        margin: 15px 20px;
-        text-align: center;
-      }
     }
   </style>
 </head>
 <body>
 
-  <header>📘 O papel da sociedade nas cidades inteligentes</header>
+  <h1>📘 O papel da sociedade nas cidades inteligentes</h1>
 
-  <div class="container">
-    <!-- Desktop: visualização embutida -->
-    <iframe src="O impacto da sociedade na construção de cidades inteligentes.pdf"></iframe>
+  <a href="O impacto da sociedade na construção de cidades inteligentes.pdf" class="btn" target="_blank">
+    Abrir eBook Completo
+  </a>
 
-    <!-- Mobile: botão para abrir em tela cheia -->
-    <div class="mobile-msg">
-      Para visualizar melhor este eBook no celular, clique abaixo:
-    </div>
-    <a href="O impacto da sociedade na construção de cidades inteligentes.pdf" target="_blank" class="open-btn">
-      📖 Abrir eBook Completo
-    </a>
-
-    <a href="ebooks.html" class="open-btn" style="background-color:#555; margin-top:10px;">⬅ Voltar</a>
-  </div>
+  <br><br>
+  <a href="ebooks.html" class="btn" style="background-color:#555;">⬅ Voltar</a>
 
 </body>
 </html>
