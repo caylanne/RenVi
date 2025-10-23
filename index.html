@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>RenVi - Tela Inicial</title>
+  <title>Tela Inicial</title>
   <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
@@ -18,7 +18,7 @@
 
     .container {
       text-align: center;
-      max-width: 360px;
+      max-width: 380px;
       width: 90%;
       padding: 50px 30px;
       border-radius: 15px;
@@ -28,16 +28,14 @@
       align-items: center;
     }
 
-    h1 {
-      color: #00a68f;
-      font-size: 38px;
-      margin-bottom: 30px;
-      font-weight: 700;
+    .illustration {
+      width: 220px; /* aumentada */
+      margin-bottom: 40px;
+      transition: transform 0.3s ease;
     }
 
-    .illustration {
-      width: 150px;
-      margin-bottom: 35px;
+    .illustration:hover {
+      transform: scale(1.03);
     }
 
     .btn {
@@ -74,26 +72,21 @@
     }
 
     @media (max-width: 400px) {
-      h1 {
-        font-size: 30px;
+      .illustration {
+        width: 170px; /* ajusta automaticamente em telas menores */
+        margin-bottom: 30px;
       }
 
       .btn {
         padding: 12px 40px;
         font-size: 15px;
       }
-
-      .illustration {
-        width: 120px;
-        margin-bottom: 25px;
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>RenVi</h1>
-    <img src="https://proton-resources-production.imgix.net/6699e2bc017992ca0bca956e06522bca197263444a56ff60278c6d81049c528f.png?auto=format&q=20" alt="Ilustração" class="illustration">
+    <img src="ChatGPT Image 19 de out. de 2025, 09_27_36.png" alt="Ilustração" class="illustration">
     
     <a href="cadastro.html" class="btn">CADASTRE-SE</a>
     <a href="login.html" class="login-link">Já tem uma conta?</a>
