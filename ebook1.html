@@ -3,81 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O papel da sociedade nas cidades inteligentes</title>
+  <title>Ebook - O Papel da Sociedade nas Cidades Inteligentes</title>
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
       background-color: #f8f8f8;
-    }
-
-    header {
-      background-color: #00bfa5;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .container {
-      padding: 10px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
+      height: 100vh;
+      text-align: center;
     }
 
-    iframe {
-      width: 100%;
-      height: 85vh;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    h1 {
+      color: #00a68f;
+      font-size: 22px;
+      margin-bottom: 20px;
+      max-width: 90%;
     }
 
-    .back-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #00bfa5;
-      color: white;
-      text-decoration: none;
+    .btn {
+      background-color: #00a68f;
+      color: #fff;
+      padding: 14px 30px;
       border-radius: 8px;
-      font-weight: 500;
+      text-decoration: none;
+      font-weight: 600;
       transition: background 0.3s;
+      font-size: 16px;
+      display: inline-block;
     }
 
-    .back-btn:hover {
-      background-color: #009e8b;
+    .btn:hover {
+      background-color: #008c77;
     }
 
-    /* Responsivo para celular */
-    @media (max-width: 600px) {
-      header {
+    .back {
+      background-color: #555;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
         font-size: 18px;
-        padding: 15px;
       }
-
-      iframe {
-        height: 75vh;
-      }
-
-      .back-btn {
-        width: 80%;
-        text-align: center;
+      .btn {
+        font-size: 15px;
+        padding: 12px 24px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>📘 O papel da sociedade nas cidades inteligentes</header>
+  <h1>📘 O Papel da Sociedade nas Cidades Inteligentes</h1>
 
-  <div class="container">
-    <iframe src="O impacto da sociedade na construção de cidades inteligentes.pdf"></iframe>
+  <!-- Botão que abre o PDF (funciona em Android e iOS) -->
+  <a href="O%20impacto%20da%20sociedade%20na%20constru%C3%A7%C3%A3o%20de%20cidades%20inteligentes.pdf" 
+     class="btn" target="_blank">
+    Abrir eBook Completo
+  </a>
 
-    <a href="ebooks.html" class="back-btn">⬅ Voltar para os Ebooks</a>
-  </div>
+  <br>
+  <a href="ebooks.html" class="btn back">⬅ Voltar</a>
 
 </body>
 </html>
