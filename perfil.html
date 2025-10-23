@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil do Usuário</title>
-    <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
+  <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
       margin: 0;
@@ -12,7 +12,6 @@
       background-color: #f8f8f8;
     }
 
-    /* ===== NAVBAR ===== */
     .navbar {
       display: flex;
       align-items: center;
@@ -46,7 +45,6 @@
       border-bottom: 2px solid #00bfa5;
     }
 
-    /* ===== CONTAINER ===== */
     .profile-container {
       width: 90%;
       max-width: 700px;
@@ -57,28 +55,51 @@
       overflow: hidden;
     }
 
-    /* ===== CABEÇALHO ===== */
     .profile-header {
       background-color: #00bfa5;
       color: white;
       text-align: center;
       padding: 40px 20px;
+      position: relative;
     }
 
     .avatar {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       background-color: #ccc;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto 15px;
+      margin: 0 auto 10px;
       font-size: 28px;
+      object-fit: cover;
+      border: 3px solid #fff;
+    }
+
+    .upload-label {
+      display: inline-block;
+      background-color: #fff;
+      color: #00bfa5;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .upload-label:hover {
+      background-color: #00a78f;
+      color: white;
+    }
+
+    input[type="file"] {
+      display: none;
     }
 
     .profile-header h2 {
-      margin: 0;
+      margin: 10px 0 0;
       font-size: 20px;
       font-weight: 600;
     }
@@ -89,7 +110,6 @@
       opacity: 0.9;
     }
 
-    /* ===== FORMULÁRIO ===== */
     .profile-content {
       padding: 25px;
     }
@@ -143,7 +163,6 @@
       opacity: 0.7;
     }
 
-    /* ===== NOTIFICAÇÕES ===== */
     .notifications {
       margin-top: 25px;
     }
@@ -169,7 +188,6 @@
       color: #777;
     }
 
-    /* ===== BOTÕES ===== */
     .actions {
       text-align: center;
       margin-top: 25px;
@@ -218,9 +236,11 @@
   <!-- ===== CONTEÚDO DO PERFIL ===== -->
   <div class="profile-container">
     <div class="profile-header">
-      <div class="avatar">🖼️</div>
-      <h2>Perfil do Usuário</h2>
-      <p>seunome@email.com</p>
+      <img id="avatar" class="avatar" src="https://via.placeholder.com/100" alt="Foto do usuário">
+      <label for="uploadFoto" class="upload-label">📸 Alterar Foto</label>
+      <input type="file" id="uploadFoto" accept="image/*">
+      <h2 id="userName">Usuário</h2>
+      <p id="userEmail">email@exemplo.com</p>
     </div>
 
     <div class="profile-content">
@@ -229,53 +249,129 @@
       <div class="form-group">
         <div class="form-row">
           <label for="name">Nome</label>
-          <input type="text" id="name" placeholder="Inserir nome">
-          <button>Salvar</button>
+          <input type="text" id="name">
+          <button onclick="saveField('nome')">Salvar</button>
         </div>
       </div>
 
       <div class="form-group">
         <div class="form-row">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Inserir email">
-          <button>Salvar</button>
+          <input type="email" id="email">
+          <button onclick="saveField('email')">Salvar</button>
         </div>
       </div>
 
       <div class="form-group">
         <div class="form-row">
           <label for="password">Senha</label>
-          <input type="password" id="password" placeholder="Inserir senha">
-          <button>Salvar</button>
+          <input type="password" id="password">
+          <button onclick="saveField('senha')">Salvar</button>
         </div>
       </div>
 
       <div class="notifications">
         <p class="section-title">Notificações</p>
-
         <div class="notification-item">
           <div>
             <strong>On Follow</strong>
             <span>Receber notificação quando alguém te seguir</span>
           </div>
-          <input type="checkbox">
+          <input type="checkbox" id="notif-follow">
         </div>
-
         <div class="notification-item">
           <div>
             <strong>New Message</strong>
             <span>Receber notificação ao receber uma nova mensagem</span>
           </div>
-          <input type="checkbox">
+          <input type="checkbox" id="notif-message">
         </div>
       </div>
 
       <div class="actions">
-        <button class="btn-signout">SIGN OUT</button><br>
-        <span class="delete">DELETE ACCOUNT</span>
+        <button class="btn-signout" onclick="logout()">SIGN OUT</button><br>
+        <span class="delete" onclick="deleteAccount()">DELETE ACCOUNT</span>
       </div>
     </div>
   </div>
+
+  <script>
+    let usuario = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!usuario) {
+      alert("⚠️ Você precisa estar logado para acessar o perfil.");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("userName").innerText = usuario.nome;
+      document.getElementById("userEmail").innerText = usuario.email;
+      document.getElementById("name").value = usuario.nome;
+      document.getElementById("email").value = usuario.email;
+      document.getElementById("password").value = usuario.senha;
+      document.getElementById("avatar").src = usuario.foto || "https://via.placeholder.com/100";
+    }
+
+    // Upload e salvamento da foto
+    const uploadFoto = document.getElementById("uploadFoto");
+    const avatar = document.getElementById("avatar");
+
+    uploadFoto.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64 = e.target.result;
+          avatar.src = base64;
+          usuario.foto = base64;
+
+          let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+          const index = usuarios.findIndex(u => u.email === usuario.email);
+          if (index !== -1) usuarios[index] = usuario;
+
+          localStorage.setItem("usuarios", JSON.stringify(usuarios));
+          localStorage.setItem("loggedUser", JSON.stringify(usuario));
+
+          alert("✅ Foto de perfil atualizada!");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Atualizar campos
+    function saveField(field) {
+      const inputId = field === 'senha' ? 'password' : field;
+      const value = document.getElementById(inputId).value;
+      usuario[field] = value;
+
+      let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      const index = usuarios.findIndex(u => u.email === usuario.email);
+      if (index !== -1) usuarios[index] = usuario;
+
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      localStorage.setItem("loggedUser", JSON.stringify(usuario));
+
+      alert("✅ Informações atualizadas!");
+      document.getElementById("userName").innerText = usuario.nome;
+      document.getElementById("userEmail").innerText = usuario.email;
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem("loggedUser");
+      window.location.href = "login.html";
+    }
+
+    // Excluir conta
+    function deleteAccount() {
+      if (confirm("Tem certeza que deseja excluir sua conta?")) {
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        usuarios = usuarios.filter(u => u.email !== usuario.email);
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        localStorage.removeItem("loggedUser");
+        alert("❌ Conta excluída com sucesso!");
+        window.location.href = "login.html";
+      }
+    }
+  </script>
 
 </body>
 </html>
