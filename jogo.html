@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo</title>
-    <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
+  <title>Jogo - RenVir</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image 19 de out. de 2025, 09_27_36.png">
   <style>
     body {
       margin: 0;
@@ -12,7 +12,6 @@
       background-color: #f8f8f8;
     }
 
-    /* Barra de navegação */
     .navbar {
       display: flex;
       align-items: center;
@@ -45,7 +44,6 @@
       border-bottom: 2px solid #00bfa5;
     }
 
-    /* Área principal do jogo */
     .game-area {
       display: flex;
       justify-content: center;
@@ -57,21 +55,19 @@
     .game-box {
       width: 90%;
       max-width: 1000px;
-      height: 450px;
-      background-color: #e9e9e9;
+      min-height: 450px;
+      background-color: #00bfa686;
       border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 18px;
-      color: #777;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      color: #333;
+      box-shadow: 0 3px 10px #00bfa5;
       position: relative;
       overflow: hidden;
-    }
-
-    .game-box:hover {
-      background-color: #009b85;
+      text-align: center;
+      padding: 20px;
     }
 
     .btn-play {
@@ -91,11 +87,25 @@
     .btn-play:hover {
       background-color: #009b85;
     }
+
+    .option-btn {
+      margin: 8px;
+      padding: 10px 20px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: #00bfa5;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Barra de navegação -->
   <div class="navbar">
     <a class="nav-item" href="inicio.html">Início</a>
     <a class="nav-item" href="ebooks.html">Ebook's</a>
@@ -104,7 +114,6 @@
     <a class="nav-item" href="perfil.html">Perfil do Usuário</a>
   </div>
 
-  <!-- Área principal de jogo -->
   <div class="game-area">
     <div class="game-box" id="gameBox">
       <p>Clique no botão abaixo para começar o jogo!</p>
@@ -113,58 +122,113 @@
   </div>
 
 <script>
-  const questions = [
+  const allQuestions = [
     {
-      question: "Qual é a capital do Brasil?",
-      options: ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"],
-      answer: "Brasília"
+      question: "Qual é o objetivo principal do projeto RenVir?",
+      options: [
+        "A) Estudar o conceito de cidades inteligentes e sustentáveis.",
+        "B) Criar jogos interativos sobre tecnologia e inovação.",
+        "C) Investigar e compreender o papel da informação e da educação digital na formação de cidadãos conscientes.",
+        "D) Desenvolver um novo conceito de cidade inteligente no Brasil."
+      ],
+      answer: "C) Investigar e compreender o papel da informação e da educação digital na formação de cidadãos conscientes."
     },
     {
-      question: "Quanto é 7 x 8?",
-      options: ["54", "56", "64", "58"],
-      answer: "56"
+      question: "O que simboliza a logomarca do projeto RenVir?",
+      options: [
+        "A) A conexão entre o ensino e a educação digital.",
+        "B) Uma cidade viva que se renova continuamente por meio da conscientização e inovação.",
+        "C) O equilíbrio entre tecnologia e economia sustentável.",
+        "D) A união de todas as cidades brasileiras em um só modelo."
+      ],
+      answer: "B) Uma cidade viva que se renova continuamente por meio da conscientização e inovação."
     },
     {
-      question: "Quem escreveu 'Dom Casmurro'?",
-      options: ["Machado de Assis", "Carlos Drummond", "José de Alencar", "Clarice Lispector"],
-      answer: "Machado de Assis"
+      question: "O que significa 'cidadania digital', conforme discutido no projeto?",
+      options: [
+        "A) Usar a tecnologia para obter benefícios pessoais.",
+        "B) Participar ativamente das redes sociais e criar conteúdo.",
+        "C) Compreender as consequências das ações online e agir com ética.",
+        "D) Aprender a usar as redes digitais para negócios."
+      ],
+      answer: "C) Compreender as consequências das ações online e agir com ética."
+    },
+    {
+      question: "Qual é a principal característica das cidades inteligentes, segundo o projeto?",
+      options: [
+        "A) A presença de tecnologia de ponta em todas as áreas.",
+        "B) O uso de tecnologias para resolver problemas reais de forma eficiente e inclusiva.",
+        "C) A integração das tecnologias com a educação digital.",
+        "D) A instalação de sensores e câmeras em todos os espaços urbanos."
+      ],
+      answer: "B) O uso de tecnologias para resolver problemas reais de forma eficiente e inclusiva."
+    },
+    {
+      question: "Quais habilidades socioemocionais os estudantes desenvolveram ao longo do projeto?",
+      options: [
+        "A) Habilidades técnicas em programação e design.",
+        "B) Cooperação, empatia e comunicação.",
+        "C) Liderança e habilidades de marketing digital.",
+        "D) Conhecimento sobre sustentabilidade ecológica."
+      ],
+      answer: "B) Cooperação, empatia e comunicação."
+    },
+    {
+      question: "Qual é a principal contribuição da sociedade para o desenvolvimento de cidades inteligentes?",
+      options: [
+        "A) Aumentar o consumo de recursos naturais.",
+        "B) Participar ativamente nas decisões e uso consciente das tecnologias.",
+        "C) Deixar toda a responsabilidade para o governo.",
+        "D) Priorizar o crescimento urbano sem planejamento."
+      ],
+      answer: "B) Participar ativamente nas decisões e uso consciente das tecnologias."
+    },
+    {
+      question: "Como o impacto ambiental deve ser considerado na criação de cidades inteligentes?",
+      options: [
+        "A) Deve ser ignorado em favor do progresso tecnológico.",
+        "B) Deve ser tratado apenas após a conclusão das obras.",
+        "C) Deve ser minimizado por meio de práticas sustentáveis e uso eficiente dos recursos.",
+        "D) Deve ser responsabilidade exclusiva das empresas privadas."
+      ],
+      answer: "C) Deve ser minimizado por meio de práticas sustentáveis e uso eficiente dos recursos."
+    },
+    {
+      question: "De que forma a economia influencia o desenvolvimento de cidades inteligentes?",
+      options: [
+        "A) A economia não tem relação com cidades inteligentes.",
+        "B) Somente países ricos podem desenvolver cidades inteligentes.",
+        "C) O investimento em inovação e infraestrutura tecnológica impulsiona o crescimento sustentável.",
+        "D) A economia deve priorizar apenas o lucro, sem considerar a qualidade de vida."
+      ],
+      answer: "C) O investimento em inovação e infraestrutura tecnológica impulsiona o crescimento sustentável."
     }
   ];
 
+  let questions = [];
   let currentQuestion = 0;
   let score = 0;
 
   const startBtn = document.getElementById("startGame");
   const gameBox = document.getElementById("gameBox");
 
-  startBtn.addEventListener("click", () => {
+  startBtn.addEventListener("click", startGame);
+
+  function startGame() {
+    score = 0;
+    currentQuestion = 0;
+    questions = shuffleArray(allQuestions).slice(0, 5); // 5 perguntas aleatórias
     showQuestion();
-  });
+  }
 
   function showQuestion() {
     const q = questions[currentQuestion];
     gameBox.innerHTML = `
-      <div style="padding: 20px; text-align: center;">
-        <h2 style="color: #333;">${q.question}</h2>
-        <div id="options" style="margin-top: 20px;">
+      <div>
+        <h2>${q.question}</h2>
+        <div id="options">
           ${q.options.map(opt => `
-            <button 
-              class="option-btn"
-              onclick="checkAnswer('${opt}')"
-              style="
-                margin: 8px;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 6px;
-                background-color: #fff;
-                color: #333;
-                cursor: pointer;
-                border: 2px solid #ccc;
-                transition: all 0.2s;
-              "
-              onmouseover="this.style.borderColor='#00bfa5'"
-              onmouseout="this.style.borderColor='#ccc'"
-            >${opt}</button>
+            <button class="option-btn" onclick="checkAnswer('${opt}')">${opt}</button>
           `).join('')}
         </div>
       </div>
@@ -181,7 +245,6 @@
     }
 
     currentQuestion++;
-
     if (currentQuestion < questions.length) {
       showQuestion();
     } else {
@@ -191,30 +254,21 @@
 
   function showResult() {
     gameBox.innerHTML = `
-      <div style="text-align: center; padding: 40px;">
+      <div style="text-align: center;">
         <h2>🏁 Fim do Jogo!</h2>
-        <p style="font-size: 18px;">Você acertou <strong>${score}</strong> de <strong>${questions.length}</strong> perguntas.</p>
-        <button onclick="restartGame()" style="
-          margin-top: 20px;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 6px;
-          background-color: #00bfa5;
-          color: white;
-          cursor: pointer;
-          font-size: 15px;
-        ">🔄 Jogar Novamente</button>
+        <p>Você acertou <strong>${score}</strong> de <strong>${questions.length}</strong> perguntas.</p>
+        <button onclick="startGame()" class="btn-play">🔄 Jogar Novamente</button>
       </div>
     `;
   }
 
-  function restartGame() {
-    currentQuestion = 0;
-    score = 0;
-    showQuestion();
+  function shuffleArray(arr) {
+    return arr
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
   }
 </script>
-
 
 </body>
 </html>
